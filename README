@@ -9,10 +9,38 @@ library that can be used for Jabber, Growl, HTTP,
 mail and other notifications with minimal effort
 in web controllers.
 
-
-
-How to use it
+Actors
 ==============
+
+Core actors of this library are messaging controllers
+and transports. Messaging controllers are called
+from web controllers that handle incoming requests,
+render message templates, do messaging-related
+filtering and pass the result to transports to deliver.
+
+Note that messaging controllers share rendering and
+filtering code with Merb core's AbstractController so
+no wheel is invented.
+
+Transports and possible use cases
+=====================================
+
+What transports do is up to specific implementation:
+
+* Jabber transport will deliver messages over XMPP
+* AMQP transport will talk to AMQP broker like RabbitMQ or ZeroMQ
+* mail transport will use SMTP or sendmail to send emails
+* HTTP POST transport will post data over HTTP ("web hooks")
+* Specific HTTP transport may post to Facebook, Twitter, LiveJournal or whatever it may be
+* IRC transport will flood some IRC channel.
+* SMS transport will deliver SMS one way or another
+* XMP-RPC transport will call some WS-* deathstars
+* Some futuristic crazy transport will send Rubinius VM bytecode
+  over the wire to be executed on the other end
+
+
+How to use this prototype
+==============================
 
 Messaging controllers are used from web controllers
 (that handle requests) and can render templates,
