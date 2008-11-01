@@ -1,0 +1,9 @@
+* Finally put spec suite I have online.
+* Add more spec examples.
+* Add event more spec examples.
+* F*cking spec examples!!
+* Mail transport.
+* HTTP transport (should use Tony Arcieri's FastHTTP library).
+* Queueing functionality for existing transports.
+* AMQP integration.
+* Extensions for RPC, WS-* deathstars and the rest of existing ecosystem.
