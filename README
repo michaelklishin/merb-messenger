@@ -229,4 +229,7 @@ up online.
 The Future
 ===================
 
-Merb messenger will be part of Merb 1.1 in early 2009.
+Merb messenger will be part of Merb 1.1 in early 2009. The Holy Grails of
+this plugin is to provide simple generic interface for messaging of all
+kinds: from Jabber and mail notifications to talking to AMQP brokers
+like RabbitMQ or ZeroMQ, doing "web hooks" and so forth.
