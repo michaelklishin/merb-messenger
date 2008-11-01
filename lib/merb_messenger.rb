@@ -7,9 +7,9 @@ if defined?(Merb::Plugins)
   # Register path for messengers under app/messengers
   Merb.push_path(:messenger, Merb.root / "app"/ "messengers")
   
-  require "merb_messenger/messengers/growl"
+  require "merb_messenger/transports/growl"
   # TODO: lazy loading
-  require "merb_messenger/messengers/xmpp"
+  require "merb_messenger/transports/xmpp"
   
   require "merb_messenger/messaging_controller"
   require "merb_messenger/messaging_mixin"
