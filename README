@@ -73,7 +73,7 @@ Every messenger action takes a hash of options that include web controller
 parameters and additional options you passed on dispatch.
 
 Every messenger uses deliver method to deliver notifications instantly
-and (in the future) queue message to stack a notification in a queue to
+and (in the future) queue method to stack a notification in a queue to
 be delivered later.
 
 Because message transports are very different, it's up to particular transport what
