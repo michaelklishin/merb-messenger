@@ -46,7 +46,6 @@ options you'd like to pass to it.
 
 Now lets look at our messenger:
 
-<code lang="ruby">
 class JournalMessenger < Merb::MessagingController
   delivery_options :lan_growl,
                    :notification => "journal notification",
@@ -61,40 +60,43 @@ class JournalMessenger < Merb::MessagingController
     # render the template in app/messengers/views/journal/create.text.erb
     body = render(:index)
 
-    # deliver using XMPP transport
+    # deliver using XMPP
+    # transport is called :remote
+    # in the application
     deliver :remote,    :body => body
     # deliver using Growl transport
+    # that is called :lan_growl across
+    # the app
     deliver :lan_growl, :body => body
   end
 end
-</code>
 
-Every messenger action takes a hash of options that include web controller
+Every messenger action takes a hash of options that includes web controller
 parameters and additional options you passed on dispatch.
 
-Every messenger uses deliver method to deliver notifications instantly
-and (in the future) queue method to stack a notification in a queue to
-be delivered later.
+Every messenger uses +deliver+ method to deliver notifications instantly
+and (in the future) +queue+ method to stack a notification in a queue to
+be delivered later. Queueing functionality will be 100% ORM agnostic.
 
-Because message transports are very different, it's up to particular transport what
+This plugin is all about connecting your web controllers and transports.
+It supposed to be generic. Because message transports are very
+different, it's up to particular transport what
 options delivery and queue methods would take.
 
 To eliminate the need to constantly duplicate some common options (like "from",
 "title" and similar), Merb messenger lets you set them up messenger-wide:
 
-<code lang="ruby">
   delivery_options :remote,
                    :title        => "Journal event",
                    :to           => ["app.notifications@jabber.org"],
                    :message_type => :chat
-</code>
 
 Above we say that all messages that go via transport called "remote"
 (that is XMPP transport in this example) use title "Journal event",
 delivered to "app.notifications@jabber.org" and use message type
 "chat".
 
-deliver method's options are merged with class-wide delivery options
++deliver+ method's options are merged with class-wide delivery options
 before they are passed on to transport. Obviously, former take
 precedence over the latter.
 
@@ -108,7 +110,6 @@ Those providing queuing functionality may add queue method that acts as deliver
 but does not do immediate delivery.
 
 Here is a Jabber transport implementation that uses xmpp4r:
-<code lang="ruby">
 require 'xmpp4r/client'
 
 module Merb
@@ -154,7 +155,6 @@ module Merb
     end
   end
 end
-</code>
 
 
 Setting transports up
