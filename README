@@ -48,6 +48,13 @@ have filters and all that. Transports can be used
 directly in models and not supposed to render
 (at least at this point in evolution of merb messenger).
 
+Transports must be required explicitly at this point. Do it
+in init.rb or add config/messengers.rb and load it from init.rb,
+and require transport file there. This is because otherwise
+lazy loading can only be accomplished using Kernel#autoload
+which some people do not like (for instance, it is not thread
+safe in MRI).
+
 Say we have a group journal/blog and we want to be notified
 on updates using Jabber. Our web controller action may
 look like this:
