@@ -2,7 +2,7 @@ module Merb
   class MessagingController < AbstractController
     #include Merb::Messenger::Transport
     
-    attr_reader :params
+    attr_reader :params, :web_controller
     
     class_inheritable_accessor :_message_transports, :_default_delivery_options
     
@@ -79,7 +79,11 @@ module Merb
     end
     
     def session
-      self.base_controller.request.session rescue {}
+      self.web_controller.request.session rescue {}
+    end
+
+    def request
+      self.web_controller.request
     end
     
     # Mimic the behavior of absolute_url in AbstractController
